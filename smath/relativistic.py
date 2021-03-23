@@ -1,8 +1,9 @@
 import numpy as np
+import matplotlib.pyplot as plt
+
 from scipy.optimize import fsolve
 from scipy.integrate import quad
 from scipy.misc import derivative
-
 
 
 def set_axes():
