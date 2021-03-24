@@ -37,7 +37,7 @@ def relfunc(f, rel, x_start=-20, x_end=20, accuracy=10, dx=1e-4):
 	x_arc_length = np.concatenate((-negetive_x_arc_length, positive_x_arc_length))
 	
 	# applying the given range for the new reference system.
-	x_arc_range = (x_arc_length >= x_start) & (x_arc_length <= x_end) #***FIX: this can result different shapes for a_range and x_arc_length. can be fixed by recuding one array
+	x_arc_range = (x_arc_length >= x_start) & (x_arc_length <= x_end)
 	x_arc_length, a_range = x_arc_length[x_arc_range], a_range[x_arc_range]
 
 	# the orthogonal linear function to the tangent in a specific point.
