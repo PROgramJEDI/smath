@@ -16,7 +16,7 @@ def set_axes():
 
 
 @numba.njit(parallel=True)
-def relfunc(f, rel, x_start=-20, x_end=20, accuracy=10, dx=1e-4):
+def relfunc(f, rel, x_start=-20, x_end=20, accuracy=10, dx=10**(-3)):
 	# the first derivitive of f(x).
 	f_tag = lambda x: derivative(f, x, dx=dx)
 	f_arc_length = lambda x: np.sqrt(1 + np.square(f_tag(x)))
