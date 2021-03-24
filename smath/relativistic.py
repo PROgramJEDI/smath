@@ -25,7 +25,6 @@ def relfunc(f, rel, x_start=-20, x_end=20, accuracy=10, dx=1e-4):
 
 	# prepare the two groups to be integrated separately.
 	a_negatives, a_positives = a_range[a_range < 0], a_range[a_range > 0] 
-	a_range = np.concatenate((a_negatives, a_positives))
 
 	# the continuous integration of the two groups.
 	negetive_x_arc_length = integral(f_arc_length(a_negatives), a_negatives, dx=dx)	
