@@ -1,3 +1,4 @@
+import numba
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -15,10 +16,11 @@ def set_axes():
 	ax.axvline(x=0, color='black')
 
 
+@numba.njit(parallel=True)
 def relfunc(f, rel, x_start=-20, x_end=20, accuracy=10, dx=10**(-3)):
 	# the first derivitive of f(x).
 	f_tag = lambda x: derivative(f, x, dx=dx)
-	f_arc_length = lambda x: np.sqrt(1 + f_tag(x) ** 2)
+	f_arc_length = lambda x: np.sqrt(1 + np.square(f_tag(x)))
 
 	# the current system of reference X-axis.
 	a_range = np.linspace(x_start, x_end, int((x_end - x_start) * accuracy))
@@ -51,5 +53,5 @@ def relfunc(f, rel, x_start=-20, x_end=20, accuracy=10, dx=10**(-3)):
 	y_diff = m(x_solutions) - m(x_arc_length)
 	x_diff = x_solutions - x_arc_length
 
-	distances = np.sqrt(x_diff ** 2 + y_diff ** 2) * (y_diff / np.absolute(y_diff))
+	distances = np.sqrt(np.square(x_diff) + np.square(y_diff)) * (y_diff / np.absolute(y_diff))
 	return x_arc_length, distances
