@@ -1,4 +1,3 @@
-import numba
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -15,8 +14,7 @@ def set_axes():
 	ax.axvline(x=0, color='black')
 
 
-@numba.njit(parallel=True)
-def relfunc(f, rel, x_start=-20, x_end=20, accuracy=10, dx=10**(-3)):
+def relfunc(f, rel, x_start=-20, x_end=20, accuracy=10, dx=1e-4):
 	# the first derivitive of f(x).
 	f_tag = lambda x: derivative(f, x, dx=dx)
 	f_arc_length = lambda x: np.sqrt(1 + np.square(f_tag(x)))
