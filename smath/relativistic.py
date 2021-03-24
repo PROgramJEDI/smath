@@ -37,7 +37,7 @@ def relfunc(f, rel, x_start=-20, x_end=20, accuracy=10, dx=1e-4):
 	
 	# applying the given range for the new reference system.
 	x_arc_range = (x_arc_length >= x_start) & (x_arc_length <= x_end)
-	x_arc_length, a_range = x_arc_length[x_arc_range], a_range[x_arc_range]
+	x_arc_length = x_arc_length[x_arc_range]
 
 	# the orthogonal linear function to the tangent in a specific point.
 	m = lambda x: (-1/f_tag(x_arc_length))*(x-x_arc_length)+f(x_arc_length)
