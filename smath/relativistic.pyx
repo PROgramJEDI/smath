@@ -1,5 +1,4 @@
 import numpy as np
-cimport numpy as np
 import matplotlib.pyplot as plt
 
 from scipy.optimize import fsolve
@@ -8,17 +7,14 @@ from scipy.integrate import cumulative_trapezoid as integral
 
 
 
-cpdef set_axes():
+def set_axes():
 	fig, ax = plt.subplots()
 	ax.grid(True, which='both')
 	ax.axhline(y=0, color='black')
 	ax.axvline(x=0, color='black')
 
 
-def relfunc(f, rel, int accuracy=10, float x_start=-20, float x_end=20, float dx=1e-4):
-	cdef np.ndarray[np.float64_t] a_range, a_negatives, a_positives;
-	cdef np.ndarray[np.float64_t] x_solutions, y_diff, x_diff, distances
-
+def relfunc(f, rel, accuracy=10, x_start=-20, x_end=20, dx=1e-4):
 	# the first derivitive of f(x).
 	f_tag = lambda x: derivative(f, x, dx=dx)
 	f_arc_length = lambda x: np.sqrt(1 + np.square(f_tag(x)))
