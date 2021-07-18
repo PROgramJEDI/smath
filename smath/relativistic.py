@@ -1,5 +1,4 @@
 import numpy as np
-import matplotlib.pyplot as plt
 
 from scipy.optimize import fsolve
 from scipy.misc import derivative
@@ -7,11 +6,17 @@ from scipy.integrate import cumulative_trapezoid as integral
 
 
 
-def set_axes():
+def plot(f, rel, accuracy=10, x_start=-20, x_end=20, dx=1e-4):
+	import matplotlib.pyplot as plt
+
 	fig, ax = plt.subplots()
 	ax.grid(True, which='both')
 	ax.axhline(y=0, color='black')
 	ax.axvline(x=0, color='black')
+
+	x, y = relfunc(f, rel, accuracy, x_start, x_end, dx)
+	plt.plot(x, y)
+	plt.show()
 
 
 def relfunc(f, rel, accuracy=10, x_start=-20, x_end=20, dx=1e-4):
@@ -27,7 +32,7 @@ def relfunc(f, rel, accuracy=10, x_start=-20, x_end=20, dx=1e-4):
 	a_negatives, a_positives = a_range[a_range < 0], a_range[a_range > 0] 
 
 	# the continuous integration of the two groups.
-	negetive_x_arc_length = integral(f_arc_length(a_negatives), a_negatives, dx=dx)	
+	negetive_x_arc_length = integral(f_arc_length(a_negatives), a_negatives, dx=dx)[::-1]	
 	positive_x_arc_length = integral(f_arc_length(a_positives), a_positives, dx=dx, initial=0)
 
 	# reduce to the same shape of the axis of the negatives integration.
