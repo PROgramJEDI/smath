@@ -1,1 +1,1 @@
-from smath.relativistic import set_axes, relfunc
+from smath.relativistic import plot, relfunc
